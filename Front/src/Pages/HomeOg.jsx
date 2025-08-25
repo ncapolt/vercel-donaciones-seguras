@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '/src/Components/NavBar';
-import './Home.css';
+import './HomeOg.css';
 
 function Home() {
   const [userName, setUserName] = useState('');
@@ -56,4 +56,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomeOg;
