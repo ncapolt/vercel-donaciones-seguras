@@ -1,6 +1,9 @@
 import express from "express";
 import cors from "cors";
 import pool from "./db.js"; // 👈 Importación única del pool
+import usuarioRouter from "./routes/usuario.router.js";
+import authRouter from "./routes/auth.router.js";
+import campaignRouter from "./routes/campaign.router.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -45,6 +48,11 @@ app.get("/test", async (req, res) => {
         res.status(500).json({ success: false, error: error.message });
     }
 });
+
+// 🟢 API Routes
+app.use("/api/usuarios", usuarioRouter);
+app.use("/api", authRouter);
+app.use("/api", campaignRouter);
 
 app.listen(port, () => {
     console.log(`donaciones-seguras is listening at http://localhost:${port}`);

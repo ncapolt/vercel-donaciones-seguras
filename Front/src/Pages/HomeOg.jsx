@@ -3,19 +3,34 @@ import { useNavigate } from 'react-router-dom';
 import NavBar from '/src/Components/NavBar';
 import './HomeOg.css';
 
-function Home() {
+function HomeOg() {
   const [userName, setUserName] = useState('');
   const [userCampaigns, setUserCampaigns] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/user')
-      .then(res => res.json())
-      .then(data => setUserName(data.name));
+    // Obtener información del usuario desde localStorage si está disponible
+    const usuario = localStorage.getItem('usuario');
+    if (usuario) {
+      const userData = JSON.parse(usuario);
+      setUserName(userData.nombre);
+    } else {
+      // Si no hay usuario logueado, usar datos por defecto
+      setUserName('Usuario');
+    }
 
-    fetch('http://localhost:3001/api/campaigns')
+    // Obtener campañas con manejo de errores
+    fetch('http://localhost:3000/api/campaigns')
       .then(res => res.json())
-      .then(data => setUserCampaigns(data));
+      .then(data => setUserCampaigns(data))
+      .catch(error => {
+        console.error('Error al cargar campañas:', error);
+        // Datos de ejemplo si la API falla
+        setUserCampaigns([
+          { id: 1, nombre: "#TodosXBahía" },
+          { id: 2, nombre: "Abrigo para el alma" }
+        ]);
+      });
   }, []);
 
   const handleChooseCampaign = (campaignId) => {
@@ -38,7 +53,7 @@ function Home() {
                 onClick={() => handleChooseCampaign(campaign.id)}
               >
                 <div className="campaign-info">
-                  <span className="campaign-name">{campaign.name}</span>
+                  <span className="campaign-name">{campaign.nombre}</span>
                 </div>
                 <div className="choose-indicator">
                   Elegir

@@ -10,9 +10,46 @@ function NuevaCampaña() {
   const [provincia, setProvincia] = useState('');
   const [motivo, setMotivo] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: lógica para agregar campaña
+    
+    if (!nombre || !localidad || !provincia || !motivo) {
+      alert('Por favor completa todos los campos');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:3000/api/campaigns', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nombre,
+          localidad,
+          provincia,
+          motivo
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert('Campaña creada exitosamente!');
+        // Limpiar el formulario
+        setNombre('');
+        setLocalidad('');
+        setProvincia('');
+        setMotivo('');
+        // Redirigir a la página principal
+        navigate('/');
+      } else {
+        alert(`Error: ${data.error}`);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error de conexión. Verifica que el servidor esté funcionando.');
+    }
   };
 
   return (
