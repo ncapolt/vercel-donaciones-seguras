@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import NavBar from '/src/Components/NavBar';
+import NavBar from '../Components/NavBar';
 import './HomeOg.css';
 
-function Home() {
+function HomeOg() {
   const [userName, setUserName] = useState('');
   const [userCampaigns, setUserCampaigns] = useState([]);
   const navigate = useNavigate();

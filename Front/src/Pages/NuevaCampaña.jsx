@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import NavBar from '/src/Components/NavBar';
+import NavBar from '../Components/NavBar';
 import './NuevaCampaña.css';
 
 function NuevaCampaña() {
