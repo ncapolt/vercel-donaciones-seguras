@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import logo from '../Images/Logo.png';
-import './SignIn.css';
+import './Registro.css';
 
-function SignIn() {
+function Registro() {
   const navigate = useNavigate();
 
   const handleOrganizadorClick = () => {
@@ -22,29 +22,29 @@ function SignIn() {
   };
 
   return (
-    <div className="signin-container">
+    <div className="registro-container">
       {/* Header con logo */}
-      <div className="signin-header">
-        <div className="signin-logo">
-          <img src={logo} alt="Logo Donaciones Seguras" className="signin-logo-img" />
+      <div className="registro-header">
+        <div className="registro-logo">
+          <img src={logo} alt="Logo Donaciones Seguras" className="registro-logo-img" />
         </div>
       </div>
 
       {/* Contenido principal */}
-      <div className="signin-content">
-        <h1 className="signin-title">Registro</h1>
-        <p className="signin-subtitle">Primero necesitamos saber qué sos</p>
+      <div className="registro-content">
+        <h1 className="registro-title">Registro</h1>
+        <p className="registro-subtitle">Primero necesitamos saber qué sos</p>
         
         {/* Botones de opción */}
-        <div className="signin-buttons">
+        <div className="registro-buttons">
           <button 
-            className="signin-btn organizador-btn" 
+            className="registro-btn organizador-btn" 
             onClick={handleOrganizadorClick}
           >
             Organizador
           </button>
           <button 
-            className="signin-btn afectado-btn" 
+            className="registro-btn afectado-btn" 
             onClick={handleAfectadoClick}
           >
             Afectado
@@ -52,7 +52,7 @@ function SignIn() {
         </div>
 
         {/* Enlace de login */}
-        <div className="signin-login-link">
+        <div className="registro-login-link">
           <span className="login-text">Ya tiene cuenta? </span>
           <button className="login-link" onClick={handleLoginClick}>
             Ingresar.
@@ -61,7 +61,7 @@ function SignIn() {
       </div>
 
       {/* Botón de retroceso */}
-      <button className="signin-back-btn">
+      <button className="registro-back-btn">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
           <path d="M15 18L9 12L15 6" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
@@ -70,4 +70,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default Registro;
