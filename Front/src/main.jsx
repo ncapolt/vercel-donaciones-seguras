@@ -14,7 +14,6 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<HomeOg />} />
         <Route path="/homeog" element={<HomeOg />} />
-        <Route path="/nueva-campaña" element={<NuevaCampaña />} />
         <Route path="/nueva-campana" element={<NuevaCampaña />} />
         <Route path="/homeaf" element={<HomeAf />} />
         <Route path="/login" element={<Login />} />
