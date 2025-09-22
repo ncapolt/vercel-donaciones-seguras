@@ -3,20 +3,40 @@ import { useNavigate } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
 import './HomeAf.css';
 
+
 function HomeAf() {
   const [userName, setUserName] = useState('');
   const [userCampaigns, setUserCampaigns] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/user')
-      .then(res => res.json())
-      .then(data => setUserName(data.name));
+    // Verificar si el usuario está logueado
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (!isLoggedIn) {
+      navigate('/login');
+      return;
+    }
 
-    fetch('http://localhost:3001/api/campaigns')
+    // Obtener información del usuario desde localStorage
+    const usuario = localStorage.getItem('usuario');
+    if (usuario) {
+      const userData = JSON.parse(usuario);
+      setUserName(userData.nombre);
+    }
+
+    // Obtener campañas (puedes mantener esta lógica o cambiarla según necesites)
+    fetch('http://localhost:3000/api/campaigns')
       .then(res => res.json())
-      .then(data => setUserCampaigns(data));
-  }, []);
+      .then(data => setUserCampaigns(data))
+      .catch(error => {
+        console.error('Error al cargar campañas:', error);
+        // Datos de ejemplo si la API falla
+        setUserCampaigns([
+          { id: 1, nombre: "#TodosXBahía" },
+          { id: 2, nombre: "Abrigo para el alma" }
+        ]);
+      });
+  }, [navigate]);
 
   const handleChooseCampaign = (campaignId) => {
     // TODO: Implementar lógica para manejar la selección de campaña
@@ -38,7 +58,7 @@ function HomeAf() {
                 onClick={() => handleChooseCampaign(campaign.id)}
               >
                 <div className="campaign-info-af">
-                  <span className="campaign-name-af">{campaign.name}</span>
+                  <span className="campaign-name-af">{campaign.nombre}</span>
                 </div>
                 <div className="choose-indicator-af">
                   Elegir
