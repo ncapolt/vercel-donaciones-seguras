@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import logo from '../Images/Logo.png';
 import './Login.css';
 
 const Login = () => {
@@ -58,55 +59,62 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      {/* Header con logo */}
       <div className="login-header">
         <div className="logo-section">
-          <h1>DONACIONES SEGURAS</h1>
-          <div className="logo-icon">🤝</div>
+          <img src={logo} alt="Logo Donaciones Seguras" className="logo-img" />
         </div>
-        <h2>LOG IN</h2>
       </div>
 
-      <form onSubmit={handleSubmit} className="login-form">
-        <div className="form-group">
-          <label htmlFor="emailOrNombre">Mail/Nombre:</label>
-          <input
-            type="text"
-            id="emailOrNombre"
-            name="emailOrNombre"
-            value={formData.emailOrNombre}
-            onChange={handleChange}
-            placeholder="Ingrese su mail o nombre aquí..."
-            required
-          />
-        </div>
+      {/* Contenido principal */}
+      <div className="login-content">
+        <h1 className="login-title">LOG IN</h1>
+        
+        <form onSubmit={handleSubmit} className="login-form">
+          <div className="form-group">
+            <label htmlFor="emailOrNombre">Mail/Nombre:</label>
+            <input
+              type="text"
+              id="emailOrNombre"
+              name="emailOrNombre"
+              value={formData.emailOrNombre}
+              onChange={handleChange}
+              placeholder="Ingrese su mail o nombre aquí..."
+              required
+            />
+          </div>
 
-        <div className="form-group">
-          <label htmlFor="contraseña">PassWord:</label>
-          <input
-            type="password"
-            id="contraseña"
-            name="contraseña"
-            value={formData.contraseña}
-            onChange={handleChange}
-            placeholder="Ingrese su contraseña aquí..."
-            required
-          />
-        </div>
+          <div className="form-group">
+            <label htmlFor="contraseña">PassWord:</label>
+            <input
+              type="password"
+              id="contraseña"
+              name="contraseña"
+              value={formData.contraseña}
+              onChange={handleChange}
+              placeholder="Ingrese su contraseña aquí..."
+              required
+            />
+          </div>
 
-        {error && <div className="error-message">{error}</div>}
+          {error && <div className="error-message">{error}</div>}
 
-        <div className="form-links">
-          <a href="/registro" className="link">No tiene cuenta? Regístrese.</a>
-          <a href="/recuperar" className="link">Me he olvidado mi contraseña.</a>
-        </div>
+          <div className="form-links">
+            <a href="/" className="link">No tiene cuenta? Regístrese.</a>
+            <a href="/recuperar" className="link">Me he olvidado mi contraseña.</a>
+          </div>
 
-        <button type="submit" className="login-button" disabled={loading}>
-          {loading ? 'Iniciando sesión...' : 'Log In'}
-        </button>
-      </form>
+          <button type="submit" className="login-button" disabled={loading}>
+            {loading ? 'Iniciando sesión...' : 'Log In'}
+          </button>
+        </form>
+      </div>
 
+      {/* Botón de retroceso */}
       <button className="back-button" onClick={() => navigate(-1)}>
-        ←
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M15 18L9 12L15 6" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
       </button>
     </div>
   );
