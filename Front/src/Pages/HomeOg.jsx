@@ -62,7 +62,7 @@ function HomeOg() {
               </div>
             ))}
           </div>
-          <button className="new-campaign-btn lower" onClick={() => navigate('/nueva-campaña')}>
+          <button className="new-campaign-btn lower" onClick={() => navigate('/nueva-campana')}>
             Nueva Campaña
           </button>
         </div>

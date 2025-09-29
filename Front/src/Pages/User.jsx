@@ -94,8 +94,7 @@ const User = () => {
   };
 
   const handleChangePassword = () => {
-    // TODO: Implementar cambio de contraseña
-    alert('Funcionalidad de cambio de contraseña próximamente');
+    navigate('/recuperar');
   };
 
   return (

@@ -1,44 +1,15 @@
-.login-container {
-  min-height: 100vh;
+.recuperar-container {
+  min-height: calc(100vh - 60px);
   background: linear-gradient(135deg, #2D1B69 0%, #1A0B3D 100%);
   display: flex;
   flex-direction: column;
   position: relative;
   font-family: 'Arial', sans-serif;
-}
-
-/* Header con logo */
-.login-header {
   padding: 20px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-}
-
-.logo-section {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.logo-section h1 {
-  color: #8B5CF6;
-  font-weight: bold;
-  font-size: 18px;
-  line-height: 1.1;
-  margin: 0;
-}
-
-.logo-img {
-  height: 50px;
-  width: auto;
-  object-fit: contain;
 }
 
 /* Contenido principal centrado */
-.login-content {
+.recuperar-content {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -48,7 +19,7 @@
   text-align: center;
 }
 
-.login-title {
+.recuperar-title {
   color: white;
   font-size: 64px;
   font-weight: bold;
@@ -56,7 +27,7 @@
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.login-form {
+.recuperar-form {
   width: 100%;
   max-width: 500px;
   display: flex;
@@ -74,6 +45,7 @@
   color: white;
   font-weight: bold;
   font-size: 20px;
+  font-family: 'Inconsolata', monospace;
   text-align: left;
 }
 
@@ -85,6 +57,7 @@
   background: #3D2A7A;
   color: white;
   font-size: 18px;
+  font-family: 'Inconsolata', monospace;
   transition: all 0.3s ease;
   box-sizing: border-box;
 }
@@ -111,27 +84,7 @@
   font-weight: 500;
 }
 
-.form-links {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.link {
-  color: #4A90E2;
-  text-decoration: none;
-  font-size: 18px;
-  transition: color 0.3s ease;
-}
-
-.link:hover {
-  color: #7BB3F5;
-  text-decoration: underline;
-}
-
-.login-button {
+.confirmar-button {
   width: 100%;
   padding: 25px 40px;
   background: #3D2A7A;
@@ -147,14 +100,14 @@
   margin-top: 40px;
 }
 
-.login-button:hover:not(:disabled) {
+.confirmar-button:hover:not(:disabled) {
   background: #FFD700;
   color: #3D2A7A;
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 }
 
-.login-button:disabled {
+.confirmar-button:disabled {
   background: #9CA3AF;
   cursor: not-allowed;
   transform: none;
@@ -181,7 +134,7 @@
 
 /* Responsive design */
 @media (max-width: 768px) {
-  .login-title {
+  .recuperar-title {
     font-size: 48px;
   }
   
@@ -194,18 +147,23 @@
     padding: 18px 22px;
   }
   
-  .login-button {
+  .confirmar-button {
     font-size: 20px;
     padding: 22px 35px;
   }
   
-  .link {
-    font-size: 16px;
+  .logo-text {
+    font-size: 12px;
+  }
+  
+  .avatar-circle {
+    width: 50px;
+    height: 50px;
   }
 }
 
 @media (max-width: 480px) {
-  .login-title {
+  .recuperar-title {
     font-size: 36px;
   }
   
@@ -218,13 +176,21 @@
     padding: 16px 20px;
   }
   
-  .login-button {
+  .confirmar-button {
     font-size: 18px;
     padding: 20px 30px;
   }
   
-  .link {
-    font-size: 14px;
+  .logo-box {
+    padding: 8px 12px;
+  }
+  
+  .logo-text {
+    font-size: 10px;
+  }
+  
+  .avatar-circle {
+    width: 40px;
+    height: 40px;
   }
 }
-

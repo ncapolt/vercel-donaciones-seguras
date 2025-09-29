@@ -44,7 +44,7 @@ const Login = () => {
         if (data.usuario.tipo_usuario_id === 1) {
           navigate('/homeaf'); // Usuario afiliado
         } else {
-          navigate('/'); // Usuario organizador
+          navigate('/homeog'); // Usuario organizador
         }
       } else {
         setError(data.error || 'Error en el login');
@@ -71,7 +71,7 @@ const Login = () => {
         <h1 className="login-title">LOG IN</h1>
         
         <form onSubmit={handleSubmit} className="login-form">
-          <div className="form-group">
+          <div className="form-group"> //mauro estubo aqui
             <label htmlFor="emailOrNombre">Mail/Nombre:</label>
             <input
               type="text"
@@ -105,13 +105,13 @@ const Login = () => {
           </div>
 
           <button type="submit" className="login-button" disabled={loading}>
-            {loading ? 'Iniciando sesión...' : 'Log In'}
+            {loading ? 'Iniciando sesión...' : 'Log In'} 
           </button>
         </form>
       </div>
 
       {/* Botón de retroceso */}
-      <button className="back-button" onClick={() => navigate(-1)}>
+      <button className="back-button" onClick={() => navigate('/registro')}>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
           <path d="M15 18L9 12L15 6" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>

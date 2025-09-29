@@ -8,6 +8,7 @@ import HomeAf from './Pages/HomeAf';
 import Login from './Pages/Login';
 import User from './Pages/User';
 import Registro from './Pages/Registro';
+import RecuperarContraseña from './Pages/RecuperarContraseña';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -16,9 +17,9 @@ createRoot(document.getElementById('root')).render(
         <Route path="/homeog" element={<HomeOg />} />
         <Route path="/nueva-campana" element={<NuevaCampaña />} />
         <Route path="/homeaf" element={<HomeAf />} />
-        <Route path="/homeog" element={<HomeOg />} />
         <Route path="/login" element={<Login />} />
         <Route path="/user" element={<User />} />
+        <Route path="/recuperar" element={<RecuperarContraseña />} />
         <Route path="/" element={<Registro />} />
       </Routes>
     </Router>
