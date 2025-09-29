@@ -2,14 +2,14 @@ body, .body-content-af {
   margin: 0;
   padding: 0;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  background: #261144;
+  background: #180333;
   color: white;
   width: 100%;
   min-height: 100vh;
 }
 
 .body-content-af {
-  padding-top: 60px;
+  padding-top: 70px;
   min-height: 100vh;
   width: 100%;
 }

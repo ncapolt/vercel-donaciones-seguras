@@ -1,40 +1,12 @@
 .login-container {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #2D1B69 0%, #1A0B3D 100%);
+  height: calc(100vh - 70px);
+  background: #180333;
   display: flex;
   flex-direction: column;
   position: relative;
   font-family: 'Arial', sans-serif;
-}
-
-/* Header con logo */
-.login-header {
   padding: 20px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-}
-
-.logo-section {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.logo-section h1 {
-  color: #8B5CF6;
-  font-weight: bold;
-  font-size: 18px;
-  line-height: 1.1;
-  margin: 0;
-}
-
-.logo-img {
-  height: 50px;
-  width: auto;
-  object-fit: contain;
+  overflow: hidden;
 }
 
 /* Contenido principal centrado */
@@ -50,10 +22,11 @@
 
 .login-title {
   color: white;
-  font-size: 64px;
+  font-size: 48px;
   font-weight: bold;
-  margin: 0 0 60px 0;
+  margin: 0 0 40px 0;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
 }
 
 .login-form {
@@ -61,13 +34,13 @@
   max-width: 500px;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .form-group label {
@@ -79,12 +52,12 @@
 
 .form-group input {
   width: 100%;
-  padding: 20px 25px;
+  padding: 15px 20px;
   border: none;
   border-radius: 12px;
   background: #3D2A7A;
   color: white;
-  font-size: 18px;
+  font-size: 16px;
   transition: all 0.3s ease;
   box-sizing: border-box;
 }
@@ -114,9 +87,9 @@
 .form-links {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .link {
@@ -133,18 +106,18 @@
 
 .login-button {
   width: 100%;
-  padding: 25px 40px;
+  padding: 20px 35px;
   background: #3D2A7A;
   color: #FFD700;
   border: none;
   border-radius: 15px;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-  margin-top: 40px;
+  margin-top: 25px;
 }
 
 .login-button:hover:not(:disabled) {
@@ -163,16 +136,16 @@
 
 .back-button {
   position: absolute;
-  bottom: 30px;
-  left: 30px;
+  bottom: 20px;
+  left: 20px;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 10px;
+  padding: 8px;
   border-radius: 50%;
   transition: background-color 0.3s ease;
   color: #8B5CF6;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .back-button:hover {

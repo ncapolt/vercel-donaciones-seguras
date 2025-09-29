@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import logo from '../Images/Logo.png';
+import NavBar from '../Components/NavBar';
 import './Login.css';
 
 const Login = () => {
@@ -58,20 +58,16 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      {/* Header con logo */}
-      <div className="login-header">
-        <div className="logo-section">
-          <img src={logo} alt="Logo Donaciones Seguras" className="logo-img" />
-        </div>
-      </div>
-
-      {/* Contenido principal */}
-      <div className="login-content">
+    <>
+      <NavBar showAvatar={false} />
+      <div className="body-content">
+        <div className="login-container">
+          {/* Contenido principal */}
+          <div className="login-content">
         <h1 className="login-title">LOG IN</h1>
         
         <form onSubmit={handleSubmit} className="login-form">
-          <div className="form-group"> //mauro estubo aqui
+          <div className="form-group">
             <label htmlFor="emailOrNombre">Mail/Nombre:</label>
             <input
               type="text"
@@ -108,15 +104,17 @@ const Login = () => {
             {loading ? 'Iniciando sesión...' : 'Log In'} 
           </button>
         </form>
-      </div>
+          </div>
 
-      {/* Botón de retroceso */}
-      <button className="back-button" onClick={() => navigate('/registro')}>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path d="M15 18L9 12L15 6" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      </button>
-    </div>
+          {/* Botón de retroceso */}
+          <button className="back-button" onClick={() => navigate('/registro')}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M15 18L9 12L15 6" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </>
   );
 };
 
