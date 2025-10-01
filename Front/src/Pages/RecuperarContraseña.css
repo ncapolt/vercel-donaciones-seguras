@@ -114,18 +114,19 @@
   box-shadow: none;
 }
 
+/* Botón de retroceso estandarizado */
 .back-button {
   position: absolute;
-  bottom: 30px;
-  left: 30px;
+  bottom: 20px;
+  left: 20px;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 10px;
+  padding: 8px;
   border-radius: 50%;
   transition: background-color 0.3s ease;
   color: #8B5CF6;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .back-button:hover {

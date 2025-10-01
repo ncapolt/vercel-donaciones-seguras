@@ -111,19 +111,22 @@ body, .nueva-campania-bg {
   color: #b84fff;
 }
 
+/* Botón de retroceso estandarizado */
 .nueva-campania-back {
   position: absolute;
-  left: -250px;
-  bottom: -30px;
+  bottom: 20px;
+  left: 20px;
   background: none;
   border: none;
-  color: #b84fff;
-  font-size: 3rem;
   cursor: pointer;
-  transition: color 0.2s;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  color: #8B5CF6;
+  font-size: 20px;
   z-index: 10;
 }
 
 .nueva-campania-back:hover {
-  color: #f7b32b;
+  background: rgba(139, 92, 246, 0.1);
 }

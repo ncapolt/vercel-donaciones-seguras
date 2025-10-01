@@ -9,6 +9,8 @@ import Login from './Pages/Login';
 import User from './Pages/User';
 import Registro from './Pages/Registro';
 import RecuperarContraseña from './Pages/RecuperarContraseña';
+import SignInAfectado from './Pages/SignInAfectado';
+import ElijaOpcion from './Pages/ElijaOpcion';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -20,6 +22,8 @@ createRoot(document.getElementById('root')).render(
         <Route path="/login" element={<Login />} />
         <Route path="/user" element={<User />} />
         <Route path="/recuperar" element={<RecuperarContraseña />} />
+        <Route path="/signin-afectado" element={<SignInAfectado />} />
+        <Route path="/elija-opcion" element={<ElijaOpcion />} />
         <Route path="/" element={<Registro />} />
       </Routes>
     </Router>

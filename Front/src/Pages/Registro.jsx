@@ -10,7 +10,7 @@ function Registro() {
   };
 
   const handleAfectadoClick = () => {
-    navigate('/login');
+    navigate('/signin-afectado');
   };
 
   const handleBackClick = () => {

@@ -102,7 +102,12 @@ function NuevaCampaña() {
         <button className="nueva-campania-btn" type="submit">
           <span className="nueva-campania-btn-icon">+</span>Agregar
         </button>
-        <button type="button" className="nueva-campania-back" onClick={() => navigate('/')}>{'<'} </button>
+        {/* Botón de retroceso */}
+        <button type="button" className="nueva-campania-back" onClick={() => navigate('/')}>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M15 18L9 12L15 6" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
       </form>
     </div>
   );
