@@ -8,6 +8,7 @@ const SignInAfectado = () => {
     nombre: '',
     apellido: '',
     mail: '',
+    contraseña: '',
     localidad: '',
     provincia: ''
   });
@@ -28,22 +29,32 @@ const SignInAfectado = () => {
     setLoading(true);
 
     // Validaciones básicas
-    if (!formData.nombre || !formData.apellido || !formData.mail || !formData.localidad || !formData.provincia) {
+    if (!formData.nombre || !formData.apellido || !formData.mail || !formData.contraseña || !formData.localidad || !formData.provincia) {
       setError('Por favor completa todos los campos');
       setLoading(false);
       return;
     }
 
+    // Validación de contraseña
+    if (formData.contraseña.length < 6) {
+      setError('La contraseña debe tener al menos 6 caracteres');
+      setLoading(false);
+      return;
+    }
+
     try {
-      // Simular registro de usuario afectado
       const response = await fetch('http://localhost:3000/api/registro-afectado', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          ...formData,
-          tipo_usuario_id: 1 // 1 = Afectado
+          nombre: formData.nombre,
+          apellido: formData.apellido,
+          mail: formData.mail,
+          contraseña: formData.contraseña,
+          localidad: formData.localidad,
+          provincia: formData.provincia
         }),
       });
 
@@ -57,10 +68,8 @@ const SignInAfectado = () => {
         setError(data.error || 'Error al registrar usuario');
       }
     } catch (err) {
-      // Para desarrollo, simular éxito
-      console.log('Modo desarrollo: Usuario afectado registrado');
-      alert('Usuario afectado registrado exitosamente (modo desarrollo). Por favor inicia sesión.');
-      navigate('/login');
+      setError('Error de conexión. Verifica que el servidor esté funcionando.');
+      console.error('Error:', err);
     } finally {
       setLoading(false);
     }
@@ -117,6 +126,19 @@ const SignInAfectado = () => {
                   value={formData.mail}
                   onChange={handleChange}
                   placeholder="Ingrese su mail aquí..."
+                  required
+                />
+              </div>
+
+              <div className="form-group full-width">
+                <label htmlFor="contraseña">Contraseña:</label>
+                <input
+                  type="password"
+                  id="contraseña"
+                  name="contraseña"
+                  value={formData.contraseña}
+                  onChange={handleChange}
+                  placeholder="Ingrese su contraseña aquí..."
                   required
                 />
               </div>
