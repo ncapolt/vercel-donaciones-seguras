@@ -47,7 +47,7 @@ const RecuperarContraseña = () => {
         return;
       }
 
-      const response = await fetch('http://localhost:3000/api/cambiar-contraseña', {
+      const response = await fetch('http://localhost:3000/api/cambiar-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

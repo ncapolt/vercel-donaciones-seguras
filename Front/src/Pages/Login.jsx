@@ -57,6 +57,46 @@ const Login = () => {
     }
   };
 
+  const handleForgotPassword = async (e) => {
+    e.preventDefault();
+    
+    if (!formData.emailOrNombre) {
+      setError('Por favor ingrese su email o nombre primero');
+      return;
+    }
+
+    setError('');
+    setLoading(true);
+
+    try {
+      // Validar que el usuario existe
+      const response = await fetch('http://localhost:3000/api/validar-usuario', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          emailOrNombre: formData.emailOrNombre
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Guardar la información del usuario temporalmente para la pantalla de recuperar
+        localStorage.setItem('usuario', JSON.stringify(data.usuario));
+        navigate('/recuperar');
+      } else {
+        setError(data.error || 'Usuario no encontrado');
+      }
+    } catch (err) {
+      setError('Error de conexión. Verifica que el servidor esté funcionando.');
+      console.error('Error:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <NavBar showAvatar={false} />
@@ -97,7 +137,7 @@ const Login = () => {
 
           <div className="form-links">
             <a href="/" className="link">No tiene cuenta? Regístrese.</a>
-            <a href="/recuperar" className="link">Me he olvidado mi contraseña.</a>
+            <a href="#" onClick={handleForgotPassword} className="link">Me he olvidado mi contraseña.</a>
           </div>
 
           <button type="submit" className="login-button" disabled={loading}>
