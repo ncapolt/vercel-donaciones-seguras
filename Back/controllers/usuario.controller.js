@@ -1,5 +1,5 @@
-import { getAllUsuarios, insertUsuario, getUsuarioById } from "../models/usuario.model.js";
-import { updateUsuario } from "../services/usuarioservice.js";
+import { getAllUsuarios, getUsuarioById } from "../models/usuario.model.js";
+import { updateUsuario, createUsuario as createUsuarioService } from "../services/usuarioservice.js";
 
 export async function getUsuarios(req, res) {
   try {
@@ -13,13 +13,45 @@ export async function getUsuarios(req, res) {
 
 export async function createUsuario(req, res) {
   try {
-    const { nombre, email, telefono, tipo_usuario_id } = req.body;
-    if (!nombre || !email) return res.status(400).json({ error: "Falta nombre o email" });
+    const { nombre, apellido, email, localidad, provincia, contraseña, tipo_usuario_id } = req.body;
+    
+    // Validaciones requeridas
+    if (!nombre || !apellido || !email || !localidad || !provincia || !contraseña) {
+      return res.status(400).json({ 
+        error: "Todos los campos son requeridos: nombre, apellido, email, localidad, provincia, contraseña" 
+      });
+    }
 
-    const nuevo = await insertUsuario({ nombre, email, telefono: telefono || null, tipo_usuario_id: tipo_usuario_id || null });
-    res.status(201).json(nuevo);
+    // Validar longitud mínima de contraseña
+    if (contraseña.length < 6) {
+      return res.status(400).json({ 
+        error: "La contraseña debe tener al menos 6 caracteres" 
+      });
+    }
+
+    const nuevoUsuario = await createUsuarioService(
+      nombre, 
+      apellido, 
+      email, 
+      localidad, 
+      provincia, 
+      contraseña, 
+      tipo_usuario_id || 1  // Default a tipo afectado si no se especifica
+    );
+    
+    res.status(201).json({
+      success: true,
+      message: "Usuario creado exitosamente",
+      usuario: nuevoUsuario
+    });
   } catch (err) {
     console.error("createUsuario:", err);
+    
+    // Si es error de duplicado de email
+    if (err.code === '23505' && err.constraint === 'usuarios_email_key') {
+      return res.status(400).json({ error: "El email ya está registrado" });
+    }
+    
     res.status(500).json({ error: "Error al crear usuario" });
   }
 }

@@ -43,7 +43,7 @@ const SignInAfectado = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/api/registro-afectado', {
+      const response = await fetch('http://localhost:3000/api/usuarios', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -51,10 +51,11 @@ const SignInAfectado = () => {
         body: JSON.stringify({
           nombre: formData.nombre,
           apellido: formData.apellido,
-          mail: formData.mail,
+          email: formData.mail, // Cambiar 'mail' por 'email' para que coincida con el backend
           contraseña: formData.contraseña,
           localidad: formData.localidad,
-          provincia: formData.provincia
+          provincia: formData.provincia,
+          tipo_usuario_id: 1 // Tipo afectado
         }),
       });
 
