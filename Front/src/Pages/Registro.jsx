@@ -6,7 +6,7 @@ function Registro() {
   const navigate = useNavigate();
 
   const handleOrganizadorClick = () => {
-    navigate('/login');
+    navigate('/elija-opcion');
   };
 
   const handleAfectadoClick = () => {
