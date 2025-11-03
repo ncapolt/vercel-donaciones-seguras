@@ -1,0 +1,56 @@
+.campaign-products-container {
+  min-height: calc(100vh - 64px);
+  background-color: #1a0826;
+  color: #fff;
+  padding: 24px;
+}
+
+.title {
+  text-align: center;
+  margin: 12px 0 24px;
+}
+
+.products-table-wrap { margin: 12px auto; max-width: 1000px; }
+
+.products-table { border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); }
+
+.table-row { display: grid; grid-template-columns: 1fr 0.7fr 0.5fr; }
+
+.table-header { background: rgba(148, 63, 255, 0.25); color: #fff; font-weight: 600; }
+
+.table-row .col { padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.row-even { background: rgba(148, 63, 255, 0.18); }
+.row-odd  { background: rgba(148, 63, 255, 0.08); }
+
+.producto .product-name { color: #fff; text-decoration: none; }
+.destino .truncate { color: #ddd; }
+.condicion .status { color: #6ef790; font-weight: 700; }
+
+.actions { display: flex; gap: 16px; justify-content: center; margin-top: 16px; }
+.actions .primary,
+.actions .secondary { 
+  background: #6b21a8; 
+  color: #fff; 
+  border: none; 
+  border-radius: 8px; 
+  padding: 10px 16px; 
+  font-size: 1rem; 
+  cursor: pointer; 
+}
+.actions .secondary { background: #8b5cf6; }
+.actions .primary:hover, .actions .secondary:hover { opacity: 0.9; }
+
+.empty { opacity: 0.85; padding: 14px; text-align: center; }
+
+.back-btn {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  background: transparent;
+  color: #c084fc;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+
