@@ -13,6 +13,7 @@ import RecuperarContraseña from './Pages/RecuperarContraseña';
 import SignInAfectado from './Pages/SignInAfectado';
 import SignInOrganizador from './Pages/SignInOrganizador';
 import ElijaOpcion from './Pages/ElijaOpcion';
+import Landing from './Pages/Landing';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -28,7 +29,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/signin-afectado" element={<SignInAfectado />} />
         <Route path="/signin-organizador" element={<SignInOrganizador />} />
         <Route path="/elija-opcion" element={<ElijaOpcion />} />
-        <Route path="/" element={<Registro />} />
+        <Route path="/" element={<Landing />} />
       </Routes>
     </Router>
   </StrictMode>,
