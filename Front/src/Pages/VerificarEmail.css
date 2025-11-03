@@ -1,0 +1,220 @@
+/* Container principal */
+.verificar-email-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #200030 0%, #1A002A 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Contenido principal */
+.verificar-email-content {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 3rem;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Título principal */
+.verificar-email-title {
+  color: #FFFFFF;
+  font-size: 2.5rem;
+  font-weight: bold;
+  font-family: 'Arial', sans-serif;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Información del email */
+.verificar-email-info {
+  margin-bottom: 2rem;
+  color: #FFFFFF;
+  font-size: 1.1rem;
+  font-family: 'Arial', sans-serif;
+}
+
+.verificar-email-info strong {
+  color: #FFD700;
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+}
+
+/* Formulario */
+.verificar-email-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Grupo de formulario */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.form-group label {
+  color: #FFFFFF;
+  font-family: 'Arial', sans-serif;
+  font-weight: normal;
+  font-size: 1.2rem;
+  text-align: left;
+}
+
+/* Input de código */
+.codigo-input {
+  background-color: #502070;
+  border: none;
+  border-radius: 12px;
+  padding: 20px;
+  color: #FFFFFF;
+  font-size: 2rem;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  letter-spacing: 0.5rem;
+  transition: all 0.3s ease;
+  min-height: 70px;
+  font-weight: bold;
+}
+
+.codigo-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px #FFD700;
+  background-color: #603080;
+}
+
+.codigo-input::placeholder {
+  color: #A080B0;
+  font-style: italic;
+  letter-spacing: normal;
+}
+
+/* Timer */
+.timer-info {
+  color: #FFFFFF;
+  font-family: 'Arial', sans-serif;
+  font-size: 1rem;
+  margin: 1rem 0;
+}
+
+.timer {
+  color: #FFD700;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* Botón verificar */
+.verificar-button {
+  background-color: #502070;
+  border: 3px solid #FFD700;
+  border-radius: 12px;
+  padding: 18px 40px;
+  color: #FFFFFF;
+  font-family: 'Arial', sans-serif;
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  min-height: 60px;
+}
+
+.verificar-button:hover:not(:disabled) {
+  background-color: #603080;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+.verificar-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Acciones */
+.verificar-email-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.reenviar-button,
+.back-button {
+  background: none;
+  border: 2px solid #FFFFFF;
+  border-radius: 8px;
+  padding: 12px 24px;
+  color: #FFFFFF;
+  font-family: 'Arial', sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.reenviar-button:hover:not(:disabled),
+.back-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: #FFD700;
+}
+
+.reenviar-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Mensaje de error */
+.error-message {
+  color: #FF6B6B;
+  font-family: 'Arial', sans-serif;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 12px;
+  background-color: rgba(255, 107, 107, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  margin: 1rem 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .verificar-email-content {
+    padding: 2rem;
+    margin: 1rem;
+  }
+  
+  .verificar-email-title {
+    font-size: 2rem;
+  }
+  
+  .codigo-input {
+    font-size: 1.8rem;
+    padding: 15px;
+    min-height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .verificar-email-content {
+    padding: 1.5rem;
+  }
+  
+  .verificar-email-title {
+    font-size: 1.8rem;
+  }
+  
+  .codigo-input {
+    font-size: 1.5rem;
+    letter-spacing: 0.3rem;
+  }
+}
+
+
+

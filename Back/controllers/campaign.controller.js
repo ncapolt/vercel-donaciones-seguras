@@ -1,4 +1,4 @@
-import { createCampaign, getAllCampaigns } from "../services/campaignservice.js";
+import { createCampaign, getAllCampaigns, getCampaignById } from "../services/campaignservice.js";
 
 export async function getCampaigns(req, res) {
   try {
@@ -30,5 +30,24 @@ export async function createCampaignController(req, res) {
   } catch (err) {
     console.error("createCampaign:", err);
     res.status(500).json({ error: "Error al crear campaña" });
+  }
+}
+
+export async function getCampaignByIdController(req, res) {
+  try {
+    const { id } = req.params;
+    const numericId = Number(id);
+    if (Number.isNaN(numericId)) {
+      return res.status(400).json({ error: "ID inválido" });
+    }
+
+    const campaign = await getCampaignById(numericId);
+    if (!campaign) {
+      return res.status(404).json({ error: "Campaña no encontrada" });
+    }
+    res.json(campaign);
+  } catch (err) {
+    console.error("getCampaignById:", err);
+    res.status(500).json({ error: "Error al obtener campaña" });
   }
 }

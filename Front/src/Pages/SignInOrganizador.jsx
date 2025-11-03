@@ -6,9 +6,12 @@ import './SignInOrganizador.css';
 const SignInOrganizador = () => {
   const [formData, setFormData] = useState({
     nombre: '',
+    apellido: '',
+    email: '',
     direccion: '',
     localidad: '',
-    provincia: ''
+    provincia: '',
+    contraseña: ''
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -27,25 +30,58 @@ const SignInOrganizador = () => {
     setLoading(true);
 
     // Validaciones básicas
-    if (!formData.nombre || !formData.direccion || !formData.localidad || !formData.provincia) {
+    if (!formData.nombre || !formData.apellido || !formData.email || !formData.direccion || !formData.localidad || !formData.provincia || !formData.contraseña) {
       setError('Por favor completa todos los campos');
       setLoading(false);
       return;
     }
 
+    // Validación de email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setError('Por favor ingresa un email válido');
+      setLoading(false);
+      return;
+    }
+
+    // Validación de contraseña
+    if (formData.contraseña.length < 6) {
+      setError('La contraseña debe tener al menos 6 caracteres');
+      setLoading(false);
+      return;
+    }
+
     try {
-      // Aquí iría la lógica para crear la ONG
-      // Por ahora simulamos el proceso
-      console.log('Datos de la ONG:', formData);
-      
-      // Simular delay de API
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      alert('ONG registrada exitosamente!');
+      // Crear la ONG como usuario tipo 2 (Organizador)
+      const userData = {
+        nombre: formData.nombre,
+        apellido: formData.apellido,
+        email: formData.email,
+        localidad: formData.localidad,
+        provincia: formData.provincia,
+        contraseña: formData.contraseña,
+        tipo_usuario_id: 2 // Tipo Organizador
+      };
+
+      const response = await fetch('http://localhost:3000/api/usuarios', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData)
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Error al crear la ONG');
+      }
+
+      alert('ONG registrada exitosamente. Por favor inicia sesión.');
       navigate('/login');
       
     } catch (err) {
-      setError('Error de conexión. Verifica que el servidor esté funcionando.');
+      setError(err.message || 'Error de conexión. Verifica que el servidor esté funcionando.');
       console.error('Error:', err);
     } finally {
       setLoading(false);
@@ -80,6 +116,32 @@ const SignInOrganizador = () => {
               </div>
 
               <div className="form-group">
+                <label htmlFor="apellido">Apellido:</label>
+                <input
+                  type="text"
+                  id="apellido"
+                  name="apellido"
+                  value={formData.apellido}
+                  onChange={handleChange}
+                  placeholder="Ingrese apellido aquí..."
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="email">Email:</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Ingrese email aquí..."
+                  required
+                />
+              </div>
+
+              <div className="form-group">
                 <label htmlFor="direccion">Dirección:</label>
                 <input
                   type="text"
@@ -88,6 +150,19 @@ const SignInOrganizador = () => {
                   value={formData.direccion}
                   onChange={handleChange}
                   placeholder="Ingrese su texto aquí..."
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="contraseña">Contraseña:</label>
+                <input
+                  type="password"
+                  id="contraseña"
+                  name="contraseña"
+                  value={formData.contraseña}
+                  onChange={handleChange}
+                  placeholder="Ingrese su contraseña aquí..."
                   required
                 />
               </div>

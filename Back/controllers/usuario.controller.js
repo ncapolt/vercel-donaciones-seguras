@@ -38,11 +38,12 @@ export async function createUsuario(req, res) {
       contraseña, 
       tipo_usuario_id || 1  // Default a tipo afectado si no se especifica
     );
-    
+
     res.status(201).json({
       success: true,
-      message: "Usuario creado exitosamente",
-      usuario: nuevoUsuario
+      message: "Usuario creado exitosamente.",
+      usuario: nuevoUsuario,
+      requiereVerificacion: false
     });
   } catch (err) {
     console.error("createUsuario:", err);

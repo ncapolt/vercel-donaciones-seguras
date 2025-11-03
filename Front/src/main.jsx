@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomeOg from './Pages/HomeOg';
+import CampaignDetail from './Pages/CampaignDetail';
 import NuevaCampaña from './Pages/NuevaCampaña';
 import HomeAf from './Pages/HomeAf';
 import Login from './Pages/Login';
@@ -18,6 +19,7 @@ createRoot(document.getElementById('root')).render(
     <Router>
       <Routes>
         <Route path="/homeog" element={<HomeOg />} />
+        <Route path="/campaign/:id" element={<CampaignDetail />} />
         <Route path="/nueva-campana" element={<NuevaCampaña />} />
         <Route path="/homeaf" element={<HomeAf />} />
         <Route path="/login" element={<Login />} />

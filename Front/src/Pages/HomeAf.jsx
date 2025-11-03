@@ -39,8 +39,7 @@ function HomeAf() {
   }, [navigate]);
 
   const handleChooseCampaign = (campaignId) => {
-    // TODO: Implementar lógica para manejar la selección de campaña
-    console.log(`Campaña seleccionada: ${campaignId}`);
+    navigate(`/campaign/${campaignId}`);
   };
 
   return (
