@@ -12,7 +12,14 @@ function Landing() {
   return (
     <>
       <header className="site-header" aria-label="Barra superior">
-        <NavBar />
+        <NavBar
+          showAvatar={false}
+          links={[
+            { label: 'Sobre nosotros', href: '#sobre-nosotros' },
+            { label: 'Contacto', href: '#contacto' },
+            { label: 'Registrate', href: '/elija-opcion', cta: true }
+          ]}
+        />
       </header>
 
       <main>
