@@ -66,7 +66,7 @@ function CampaignDetail() {
         <div className="campaign-meta">
           <span>{campaign.localidad}, {campaign.provincia}</span>
         </div>
-        <button className="primary-btn" onClick={() => navigate('/homeog')}>Vamos!</button>
+        <button className="primary-btn" onClick={() => navigate(`/campaign/${id}/products`)}>Vamos!</button>
         <button className="back-btn" onClick={handleBack} aria-label="Volver" title="Volver">◀</button>
       </div>
     </>
