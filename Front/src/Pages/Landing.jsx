@@ -180,7 +180,7 @@ function Landing() {
                 <span className="promo-line1">Por esto y mucho más, el cambio es hoy.</span>
                 <span className="promo-line2">Es con</span>
                 <span className="promo-line3">
-                  <span className="promo-donaciones">DONACIONES</span>
+                  <span className="promo-donaciones">DONACIONES </span>
                   <span className="promo-seguras">SEGURAS</span>
                 </span>
               </h2>
