@@ -12,12 +12,29 @@ const pool = new Pool({
     port: 5432,
     ssl: {
         rejectUnauthorized: false
-    }
+    },
+    connectionTimeoutMillis: 10000,
+    idleTimeoutMillis: 30000,
+    max: 20,
+    min: 0
 });
 
-// Probamos conexión al iniciar
-pool.connect()
-    .then(() => console.log("✅ Conectado correctamente a la Base de Datos."))
-    .catch((err) => console.error("❌ Error al conectar con la Base de Datos.", err));
+// Manejar errores de conexión
+pool.on('error', (err) => {
+    console.error('Error inesperado en el cliente de base de datos:', err);
+});
+
+// Función para probar la conexión
+export async function testConnection() {
+    try {
+        const client = await pool.connect();
+        console.log("✅ Conectado correctamente a la Base de Datos.");
+        client.release();
+        return true;
+    } catch (err) {
+        console.error("❌ Error al conectar con la Base de Datos.", err);
+        return false;
+    }
+}
 
 export default pool;

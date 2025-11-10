@@ -14,7 +14,29 @@
 
 .products-table { border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); }
 
-.table-row { display: grid; grid-template-columns: 1fr 0.7fr 0.5fr; }
+.table-row { display: grid; grid-template-columns: 1fr 0.7fr 0.5fr 0.6fr; }
+.products-table.with-actions .table-row {
+  grid-template-columns: 1fr 0.7fr 0.5fr 0.6fr 0.4fr;
+}
+.table-row .col.acciones { 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+}
+.edit-btn {
+  background: transparent;
+  border: 2px solid #FFD700;
+  border-radius: 6px;
+  color: #FFD700;
+  font-size: 1.2rem;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.edit-btn:hover {
+  background: rgba(255, 215, 0, 0.1);
+  transform: scale(1.1);
+}
 
 .table-header { background: rgba(148, 63, 255, 0.25); color: #fff; font-weight: 600; }
 
@@ -24,7 +46,19 @@
 
 .producto .product-name { color: #fff; text-decoration: none; }
 .destino .truncate { color: #ddd; }
-.condicion .status { color: #6ef790; font-weight: 700; }
+.condicion { color: #fff; }
+.estado .estado-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.estado-libre { color: #6ef790; }
+.estado-reservado { color: #ff6b6b; }
+.estado-en_camino { color: #4fc3f7; }
+.estado-en_destino { color: #4fc3f7; }
+.estado-entregado { color: #fff; }
 
 .actions { display: flex; gap: 16px; justify-content: center; margin-top: 16px; }
 .actions .primary,
@@ -41,6 +75,21 @@
 .actions .primary:hover, .actions .secondary:hover { opacity: 0.9; }
 
 .empty { opacity: 0.85; padding: 14px; text-align: center; }
+
+.error-message {
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px 0;
+  text-align: center;
+}
+
+.error-message .error {
+  color: #FF6B6B;
+  margin: 0;
+  font-weight: 600;
+}
 
 .back-btn {
   position: fixed;

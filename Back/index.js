@@ -1,9 +1,14 @@
 import express from "express";
 import cors from "cors";
-import pool from "./db.js"; // 👈 Importación única del pool
+import pool, { testConnection } from "./db.js"; // 👈 Importación única del pool
 import usuarioRouter from "./routes/usuario.router.js";
 import authRouter from "./routes/auth.router.js";
 import campaignRouter from "./routes/campaign.router.js";
+import productoRouter from "./routes/producto.router.js";
+import afectadoRouter from "./routes/afectado.router.js";
+import emailVerificationRouter from "./routes/emailVerification.router.js";
+
+console.log('🔍 Importando afectadoRouter:', afectadoRouter);
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -50,62 +55,61 @@ app.get("/test", async (req, res) => {
 });
 
 // 🟢 API Routes
-app.use("/api/usuarios", usuarioRouter);
-app.use("/api", authRouter);
-app.use("/api", campaignRouter);
+console.log('🔍 Registrando rutas...');
 
-app.listen(port, () => {
+try {
+    app.use("/api/usuarios", usuarioRouter);
+    console.log('✅ Rutas de usuarios registradas');
+} catch (error) {
+    console.error('❌ Error registrando rutas de usuarios:', error.message);
+}
+
+try {
+    app.use("/api", authRouter);
+    console.log('✅ Rutas de auth registradas');
+} catch (error) {
+    console.error('❌ Error registrando rutas de auth:', error.message);
+}
+
+try {
+    app.use("/api", campaignRouter);
+    console.log('✅ Rutas de campaign registradas');
+} catch (error) {
+    console.error('❌ Error registrando rutas de campaign:', error.message);
+}
+
+try {
+    app.use("/api", afectadoRouter);
+    console.log('✅ Rutas de afectado registradas');
+} catch (error) {
+    console.error('❌ Error registrando rutas de afectado:', error.message);
+}
+
+try {
+    app.use("/api", productoRouter);
+    console.log('✅ Rutas de producto registradas');
+} catch (error) {
+    console.error('❌ Error registrando rutas de producto:', error.message);
+}
+
+try {
+    app.use("/api/verificacion", emailVerificationRouter);
+    console.log('✅ Rutas de verificación de email registradas');
+} catch (error) {
+    console.error('❌ Error registrando rutas de verificación:', error.message);
+}
+
+app.listen(port, async () => {
     console.log(`donaciones-seguras is listening at http://localhost:${port}`);
+    // Probar conexión a la base de datos de forma asíncrona
+    await testConnection();
 });
 
-
-
-
-
-
-
-
-/* import express from "express";
-
-
-import cors from "cors";
-const app = express();
-const port = 3000;
-import './db.js';
-
-
-app.use(cors());
-
-// import diagnosticoRouter from "./routes/diagnostico.router.js" 
-// import medicoRouter from "./routes/medico.router.js"
-// import pacienteRouter from "./routes/paciente.router.js"
-// import authRouter from "./routes/auth.router.js"
-// import imagesRouter from "./routes/images.router.js"
-
-
-app.use(express.json());
-
-app.get("/", (_, res) => {
-    res.send("donaciones-seguras API working!");
+// Manejar errores no capturados para evitar que el servidor se cierre
+process.on('uncaughtException', (err) => {
+    console.error('Error no capturado:', err);
 });
 
-// //ROUTER DIAGNOSTICO
-// app.use("/diagnostico", diagnosticoRouter);
-
-// //ROUTER MEDICO
-// app.use("/medico", medicoRouter);
-
-// //ROUTER PACIENTE
-// app.use("/paciente", pacienteRouter);
-
-// //ROUTER AUTH
-// app.use("/auth", authRouter); 
-
-// //ROUTER IMAGES
-// app.use("/images", imagesRouter);
-
-
-app.listen(port, () => {
-    console.log(`donaciones-seguras is listening at http://localhost:${port}`);
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('Promesa rechazada no manejada:', reason);
 });
- */

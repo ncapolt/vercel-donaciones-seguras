@@ -1,10 +1,28 @@
 import { Router } from "express";
-import { getProductosByCampaignController } from "../controllers/producto.controller.js";
+import { 
+  getProductosByCampaignController, 
+  createProductoController,
+  getTiposProductoController,
+  getProductoByIdController,
+  updateProductoController
+} from "../controllers/producto.controller.js";
 
 const router = Router();
 
 // List products for a campaign
 router.get("/productos/by-campaign/:campaignId", getProductosByCampaignController);
+
+// Get single product by id
+router.get("/productos/:id", getProductoByIdController);
+
+// Create a new product
+router.post("/productos", createProductoController);
+
+// Update a product
+router.put("/productos/:id", updateProductoController);
+
+// Get product types
+router.get("/tipos-producto", getTiposProductoController);
 
 export default router;
 
