@@ -18,6 +18,8 @@ import SignInOrganizador from './Pages/SignInOrganizador';
 import ElijaOpcion from './Pages/ElijaOpcion';
 import Landing from './Pages/Landing';
 import SignInAyudante from './Pages/SignInAyudante';
+import EntregarPedido from './Pages/EntregarPedido';
+import VerificarPedido from './Pages/VerificarPedido';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -27,6 +29,8 @@ createRoot(document.getElementById('root')).render(
         <Route path="/campaign/:id" element={<CampaignDetail />} />
         <Route path="/campaign/:campaignId/products" element={<CampaignProducts />} />
         <Route path="/campaign/:campaignId/nuevo-producto" element={<NuevoProducto />} />
+        <Route path="/campaign/:campaignId/entregar-pedido" element={<EntregarPedido />} />
+        <Route path="/pedido/:pedidoId/verificar" element={<VerificarPedido />} />
         <Route path="/producto/:productId/editar" element={<EditarProducto />} />
         <Route path="/nueva-campana" element={<NuevaCampaña />} />
         <Route path="/homeaf" element={<HomeAf />} />

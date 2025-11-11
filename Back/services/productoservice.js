@@ -73,4 +73,31 @@ export const updateProduct = async (productId, nombre, tipo_producto_id, estado,
     }
 };
 
+export const markProductsAsDelivered = async (productIds) => {
+    try {
+        if (!productIds || productIds.length === 0) {
+            throw new Error('No se proporcionaron productos para marcar como entregados');
+        }
+        
+        // Validar que todos los IDs sean números
+        const numericIds = productIds.map(id => Number(id)).filter(id => !Number.isNaN(id));
+        if (numericIds.length === 0) {
+            throw new Error('No se proporcionaron IDs válidos');
+        }
+        
+        // Crear placeholders dinámicos de forma segura
+        const placeholders = numericIds.map((_, index) => `$${index + 1}`).join(', ');
+        const query = `UPDATE producto 
+                       SET estado_producto = 'entregado'
+                       WHERE id IN (${placeholders})
+                       RETURNING id, nombre, estado_producto`;
+        
+        const result = await pool.query(query, numericIds);
+        return result.rows;
+    } catch (error) {
+        console.error('Error en markProductsAsDelivered:', error);
+        throw error;
+    }
+};
+
 

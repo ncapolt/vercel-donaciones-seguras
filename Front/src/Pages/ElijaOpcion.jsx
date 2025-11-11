@@ -20,6 +20,10 @@ const ElijaOpcion = () => {
     navigate(-1);
   };
 
+  const handleLoginClick = () => {
+    navigate('/login');
+  };
+
   return (
     <>
       <NavBar showAvatar={false} />
@@ -47,6 +51,16 @@ const ElijaOpcion = () => {
                 onClick={handleAyudanteClick}
               >
                 Ayudante
+              </button>
+            </div>
+
+            {/* Botón de iniciar sesión */}
+            <div className="elija-opcion-login-section">
+              <button 
+                className="elija-opcion-login-btn" 
+                onClick={handleLoginClick}
+              >
+                Ya estoy registrado, iniciar sesión
               </button>
             </div>
           </div>

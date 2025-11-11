@@ -157,10 +157,10 @@ function CampaignProducts() {
               )}
             </div>
 
-            {campaignId && (
+            {campaignId && isOrganizador && (
               <div className="actions">
                 <button className="primary" onClick={() => navigate(`/campaign/${campaignId}/nuevo-producto`)}>Nuevo Producto</button>
-                <button className="secondary" onClick={() => {/* marcar entrega */}}>Entregar pedido</button>
+                <button className="secondary" onClick={() => navigate(`/campaign/${campaignId}/entregar-pedido`)}>Entregar pedido</button>
               </div>
             )}
           </div>

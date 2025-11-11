@@ -1,4 +1,4 @@
-import { getProductsByCampaign, createProduct, getTiposProducto, getProductById, updateProduct } from "../services/productoservice.js";
+import { getProductsByCampaign, createProduct, getTiposProducto, getProductById, updateProduct, markProductsAsDelivered } from "../services/productoservice.js";
 
 export async function getProductosByCampaignController(req, res) {
   try {
@@ -133,6 +133,40 @@ export async function updateProductoController(req, res) {
   } catch (err) {
     console.error("updateProducto:", err);
     res.status(500).json({ error: "Error al actualizar producto" });
+  }
+}
+
+export async function markProductsAsDeliveredController(req, res) {
+  try {
+    const { productIds } = req.body;
+
+    if (!productIds || !Array.isArray(productIds) || productIds.length === 0) {
+      return res.status(400).json({ 
+        error: "Se requiere un array de IDs de productos" 
+      });
+    }
+
+    // Validar que todos los IDs sean números
+    const numericIds = productIds.map(id => Number(id));
+    if (numericIds.some(id => Number.isNaN(id))) {
+      return res.status(400).json({ 
+        error: "Todos los IDs deben ser números válidos" 
+      });
+    }
+
+    const productosEntregados = await markProductsAsDelivered(numericIds);
+
+    res.json({
+      success: true,
+      message: `${productosEntregados.length} producto(s) marcado(s) como entregado(s)`,
+      productos: productosEntregados
+    });
+  } catch (err) {
+    console.error("markProductsAsDelivered:", err);
+    res.status(500).json({ 
+      error: "Error al marcar productos como entregados",
+      details: err.message 
+    });
   }
 }
 

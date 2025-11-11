@@ -4,7 +4,8 @@ import {
   createProductoController,
   getTiposProductoController,
   getProductoByIdController,
-  updateProductoController
+  updateProductoController,
+  markProductsAsDeliveredController
 } from "../controllers/producto.controller.js";
 
 const router = Router();
@@ -23,6 +24,9 @@ router.put("/productos/:id", updateProductoController);
 
 // Get product types
 router.get("/tipos-producto", getTiposProductoController);
+
+// Mark products as delivered
+router.post("/productos/deliver", markProductsAsDeliveredController);
 
 export default router;
 

@@ -5,6 +5,7 @@ import usuarioRouter from "./routes/usuario.router.js";
 import authRouter from "./routes/auth.router.js";
 import campaignRouter from "./routes/campaign.router.js";
 import productoRouter from "./routes/producto.router.js";
+import pedidoRouter from "./routes/pedido.router.js";
 import afectadoRouter from "./routes/afectado.router.js";
 import emailVerificationRouter from "./routes/emailVerification.router.js";
 
@@ -90,6 +91,13 @@ try {
     console.log('✅ Rutas de producto registradas');
 } catch (error) {
     console.error('❌ Error registrando rutas de producto:', error.message);
+}
+
+try {
+    app.use("/api", pedidoRouter);
+    console.log('✅ Rutas de pedido registradas');
+} catch (error) {
+    console.error('❌ Error registrando rutas de pedido:', error.message);
 }
 
 try {
