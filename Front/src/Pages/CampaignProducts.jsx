@@ -13,14 +13,19 @@ function CampaignProducts() {
   const [campaignError, setCampaignError] = useState(null);
   const [productsError, setProductsError] = useState(null);
   const [isOrganizador, setIsOrganizador] = useState(false);
+  const [isAfectado, setIsAfectado] = useState(false);
+  const [selectedProducts, setSelectedProducts] = useState([]);
+  const [reservando, setReservando] = useState(false);
+  const [reservaError, setReservaError] = useState('');
 
-  // Verificar si el usuario es organizador
+  // Verificar tipo de usuario
   useEffect(() => {
     const usuario = localStorage.getItem('usuario');
     if (usuario) {
       try {
         const userData = JSON.parse(usuario);
         setIsOrganizador(userData.tipo_usuario_id === 2);
+        setIsAfectado(userData.tipo_usuario_id === 1);
       } catch (e) {
         console.error('Error parsing usuario:', e);
       }
@@ -79,6 +84,75 @@ function CampaignProducts() {
     return () => { isMounted = false; };
   }, [campaignId]);
 
+  const handleCheckboxChange = (productId) => {
+    setSelectedProducts(prev => {
+      if (prev.includes(productId)) {
+        return prev.filter(id => id !== productId);
+      } else {
+        return [...prev, productId];
+      }
+    });
+    setReservaError('');
+  };
+
+  const handleSelectAll = () => {
+    const productosLibres = products.filter(p => p.estado_producto === 'libre').map(p => p.id);
+    if (selectedProducts.length === productosLibres.length && productosLibres.length > 0) {
+      setSelectedProducts([]);
+    } else {
+      setSelectedProducts(productosLibres);
+    }
+    setReservaError('');
+  };
+
+  const handleReservarPedido = async () => {
+    if (selectedProducts.length === 0) {
+      setReservaError('Por favor selecciona al menos un producto');
+      return;
+    }
+
+    const usuario = localStorage.getItem('usuario');
+    if (!usuario) {
+      setReservaError('Debes estar logueado para reservar productos');
+      return;
+    }
+
+    setReservando(true);
+    setReservaError('');
+
+    try {
+      const userData = JSON.parse(usuario);
+      const response = await fetch('http://localhost:3000/api/pedidos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          usuario_id: userData.id,
+          campaign_id: parseInt(campaignId),
+          producto_ids: selectedProducts
+        })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Error al crear el pedido');
+      }
+
+      // Redirigir a la página de confirmación con el código de reserva
+      navigate(`/pedido/${result.pedido.id}/confirmar`);
+    } catch (err) {
+      setReservaError(err.message || 'Error de conexión. Verifica que el servidor esté funcionando.');
+      console.error('Error:', err);
+    } finally {
+      setReservando(false);
+    }
+  };
+
+  const productosLibres = products.filter(p => p.estado_producto === 'libre');
+  const allSelected = productosLibres.length > 0 && selectedProducts.length === productosLibres.length;
+
   return (
     <>
       <NavBar />
@@ -104,10 +178,26 @@ function CampaignProducts() {
           <div className="products-table-wrap">
             {campaignName && <h2 style={{ textAlign: 'center', marginBottom: '1rem', opacity: 0.9 }}>{campaignName}</h2>}
             
-            <div className={`products-table ${isOrganizador ? 'with-actions' : ''}`}>
+            <div className={`products-table ${isOrganizador ? 'with-actions' : ''} ${isAfectado ? 'with-checkboxes' : ''}`}>
               <div className="table-row table-header">
-                <div className="col producto">Producto</div>
-                <div className="col destino">Destino</div>
+                {isAfectado && <div className="col checkbox-col">
+                  {productosLibres.length > 0 && (
+                    <input
+                      type="checkbox"
+                      checked={allSelected}
+                      onChange={handleSelectAll}
+                      title="Seleccionar todos"
+                    />
+                  )}
+                </div>}
+                {isAfectado ? (
+                  <div className="col producto-destino">Producto/Destino</div>
+                ) : (
+                  <>
+                    <div className="col producto">Producto</div>
+                    <div className="col destino">Destino</div>
+                  </>
+                )}
                 <div className="col condicion">Condición</div>
                 <div className="col estado">Estado</div>
                 {isOrganizador && <div className="col acciones">Acciones</div>}
@@ -126,14 +216,39 @@ function CampaignProducts() {
                     'entregado': 'Entregado'
                   };
                   const estadoLabel = estadoLabels[estadoProducto] || estadoProducto;
+                  const isLibre = estadoProducto === 'libre';
+                  const isSelected = selectedProducts.includes(p.id);
+                  
                   return (
                     <div key={p.id} className={`table-row ${idx % 2 === 0 ? 'row-even' : 'row-odd'}`}>
-                      <div className="col producto">
-                        <span className="product-name">{p.nombre}</span>
-                      </div>
-                      <div className="col destino">
-                        <span className="truncate">{p.destino || 'Comunidad...'}</span>
-                      </div>
+                      {isAfectado && (
+                        <div className="col checkbox-col">
+                          {isLibre ? (
+                            <input
+                              type="checkbox"
+                              checked={isSelected}
+                              onChange={() => handleCheckboxChange(p.id)}
+                            />
+                          ) : (
+                            <span style={{ opacity: 0.3 }}>—</span>
+                          )}
+                        </div>
+                      )}
+                      {isAfectado ? (
+                        <div className="col producto-destino">
+                          <span className="product-name">{p.nombre}</span>
+                          <span className="destino-text">{p.destino || 'Comunidad...'}</span>
+                        </div>
+                      ) : (
+                        <>
+                          <div className="col producto">
+                            <span className="product-name">{p.nombre}</span>
+                          </div>
+                          <div className="col destino">
+                            <span className="truncate">{p.destino || 'Comunidad...'}</span>
+                          </div>
+                        </>
+                      )}
                       <div className="col condicion">
                         <span>{condicionLabel}</span>
                       </div>
@@ -161,6 +276,23 @@ function CampaignProducts() {
               <div className="actions">
                 <button className="primary" onClick={() => navigate(`/campaign/${campaignId}/nuevo-producto`)}>Nuevo Producto</button>
                 <button className="secondary" onClick={() => navigate(`/campaign/${campaignId}/entregar-pedido`)}>Entregar pedido</button>
+              </div>
+            )}
+
+            {campaignId && isAfectado && (
+              <div className="reservar-pedido-section">
+                {reservaError && (
+                  <div className="reserva-error-message">
+                    <p>{reservaError}</p>
+                  </div>
+                )}
+                <button 
+                  className="reservar-button"
+                  onClick={handleReservarPedido}
+                  disabled={reservando || selectedProducts.length === 0}
+                >
+                  {reservando ? 'Reservando...' : `Reservar pedido (${selectedProducts.length})`}
+                </button>
               </div>
             )}
           </div>

@@ -20,6 +20,7 @@ import Landing from './Pages/Landing';
 import SignInAyudante from './Pages/SignInAyudante';
 import EntregarPedido from './Pages/EntregarPedido';
 import VerificarPedido from './Pages/VerificarPedido';
+import ConfirmarPedido from './Pages/ConfirmarPedido';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -31,6 +32,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/campaign/:campaignId/nuevo-producto" element={<NuevoProducto />} />
         <Route path="/campaign/:campaignId/entregar-pedido" element={<EntregarPedido />} />
         <Route path="/pedido/:pedidoId/verificar" element={<VerificarPedido />} />
+        <Route path="/pedido/:pedidoId/confirmar" element={<ConfirmarPedido />} />
         <Route path="/producto/:productId/editar" element={<EditarProducto />} />
         <Route path="/nueva-campana" element={<NuevaCampaña />} />
         <Route path="/homeaf" element={<HomeAf />} />
