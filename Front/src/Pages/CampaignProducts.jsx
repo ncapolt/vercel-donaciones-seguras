@@ -17,8 +17,9 @@ function CampaignProducts() {
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [reservando, setReservando] = useState(false);
   const [reservaError, setReservaError] = useState('');
+  const [navbarLinks, setNavbarLinks] = useState([]);
 
-  // Verificar tipo de usuario
+  // Verificar tipo de usuario y configurar links de navbar
   useEffect(() => {
     const usuario = localStorage.getItem('usuario');
     if (usuario) {
@@ -26,9 +27,22 @@ function CampaignProducts() {
         const userData = JSON.parse(usuario);
         setIsOrganizador(userData.tipo_usuario_id === 2);
         setIsAfectado(userData.tipo_usuario_id === 1);
+        
+        // Configurar links del navbar según el tipo de usuario
+        const links = [
+          { label: 'Punto de recolección', href: '/punto-recoleccion' },
+          { label: 'Campañas', href: userData.tipo_usuario_id === 2 ? '/homeog' : '/homeaf' }
+        ];
+        setNavbarLinks(links);
       } catch (e) {
         console.error('Error parsing usuario:', e);
       }
+    } else {
+      // Links por defecto si no hay usuario
+      setNavbarLinks([
+        { label: 'Punto de recolección', href: '/punto-recoleccion' },
+        { label: 'Campañas', href: '/homeog' }
+      ]);
     }
   }, []);
 
@@ -155,7 +169,7 @@ function CampaignProducts() {
 
   return (
     <>
-      <NavBar />
+      <NavBar links={navbarLinks} />
       <div className="campaign-products-container">
         <h1 className="title">Productos cargados</h1>
 
