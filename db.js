@@ -4,19 +4,26 @@ dotenv.config();
 import pkg from "pg";
 const { Pool } = pkg;
 
-const pool = new Pool({
-    user: process.env.POSTGRES_USER,
-    host: process.env.POSTGRES_HOST,
-    database: process.env.POSTGRES_DATABASE,
-    password: process.env.POSTGRES_PASSWORD,
-    port: 5432,
+// const pool = new Pool({
+//     user: process.env.POSTGRES_USER,
+//     host: process.env.POSTGRES_HOST,
+//     database: process.env.POSTGRES_DATABASE,
+//     password: process.env.POSTGRES_PASSWORD,
+//     port: 5432,
+//     ssl: {
+//         rejectUnauthorized: false
+//     },
+//     connectionTimeoutMillis: 10000,
+//     idleTimeoutMillis: 30000,
+//     max: 20,
+//     min: 0
+// });
+
+export const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
     ssl: {
-        rejectUnauthorized: false
-    },
-    connectionTimeoutMillis: 10000,
-    idleTimeoutMillis: 30000,
-    max: 20,
-    min: 0
+      rejectUnauthorized: false,
+    }
 });
 
 // Manejar errores de conexión
